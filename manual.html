@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Manual Refresh Prototype</title>
+</head>
+<body>
+  <h2>Backlog (Manual Refresh)</h2>
+  <button onclick="loadBacklog()">Refresh Backlog</button>
+  <ul id="backlog"></ul>
+
+  <script>
+    function loadBacklog() {
+      const sampleStories = [
+        { id: 1, title: "As a user, I can submit an idea" },
+        { id: 2, title: "As a product owner, I can review an idea" },
+        { id: 3, title: "As a developer, I can update story status" },
+        { id: 4, title: "As a scrum master, I can generate a sprint report" },
+        { id: 5, title: "As a user, I can view the project backlog" }
+      ];
+
+      const list = document.getElementById("backlog");
+      list.innerHTML = "";
+      sampleStories.forEach(item => {
+        const li = document.createElement("li");
+        li.textContent = `${item.id}: ${item.title}`;
+        list.appendChild(li);
+      });
+    }
+  </script>
+</body>
+</html>

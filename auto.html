@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Auto Polling Prototype</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 30px; }
+    h2 { color: #1a73e8; }
+    #timestamp { color: gray; font-size: 14px; margin-bottom: 10px; }
+    li { margin: 4px 0; }
+  </style>
+</head>
+<body>
+  <h2>Backlog (Auto Refresh every 5 seconds)</h2>
+  <p id="timestamp">Last updated: —</p>
+  <ul id="backlog"></ul>
+
+  <script>
+    const sampleStories = [
+      { id: 1, title: "As a user, I can submit an idea" },
+      { id: 2, title: "As a product owner, I can review an idea" },
+      { id: 3, title: "As a developer, I can update story status" },
+      { id: 4, title: "As a scrum master, I can generate a sprint report" },
+      { id: 5, title: "As a user, I can view the project backlog" }
+    ];
+
+    function loadBacklog() {
+      const list = document.getElementById("backlog");
+      list.innerHTML = "";
+
+      // Show update time so change is visible
+      const now = new Date().toLocaleTimeString();
+      document.getElementById("timestamp").textContent = "Last updated: " + now;
+
+      // Shuffle items so refresh looks dynamic
+      const shuffled = [...sampleStories].sort(() => Math.random() - 0.5);
+
+      shuffled.forEach(item => {
+        const li = document.createElement("li");
+        li.textContent = `${item.id}: ${item.title}`;
+        list.appendChild(li);
+      });
+    }
+
+    // Initial load + refresh every 5 seconds
+    loadBacklog();
+    setInterval(loadBacklog, 5000);
+  </script>
+</body>
+</html>
